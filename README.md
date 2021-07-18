@@ -1,4 +1,4 @@
-## IPFS RPi
+## IPFS RPi in a Docker container
 
 A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other ARM-based devices working in a Docker container
 
@@ -42,7 +42,7 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
   
   To pin a file locally:
   ````SHELL
-  sudo docker exec -it ipfs ipfs pin QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH
+  sudo docker exec -it ipfs ipfs pin add QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH
   sudo docker exec -it ipfs ipfs pin ls --type recursive
   ````
   
