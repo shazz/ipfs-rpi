@@ -50,5 +50,7 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
   sudo docker exec -it ipfs ipfs pin ls --type recursive
   ````
   
+### Acknowledgements
 
+Thanks a lot to Claudio Bizzotto (fork from https://github.com/claudiobizzotto/ipfs-rpi) and Analog Void (https://github.com/analogvoid/rpi-ipfs) for the original code
 
