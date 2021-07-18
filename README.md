@@ -13,6 +13,10 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
   - 14001
   - 18080
 
+  Volumes mapping
+  - `shared`: shared volume to add, get files between the host and the CLI
+  - `repo`: the IPFS repository
+
 ### Web interface:
 
   Open a browser at:
