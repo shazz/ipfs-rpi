@@ -25,7 +25,16 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
   sudo docker exec -it ipfs ipfs pin ls --type recursive
   ````
   
-  Use the /shared volume to add / get files
+  Use the /shared volume to add / get files:
+  ````
+  cp -r mymovies shared/
+  sudo docker exec -it ipfs ipfs add -r /shared/mymovies/
+  sudo docker exec -it ipfs ipfs files cp /ipfs/<hash>
+  sudo docker exec -it ipfs ipfs files mv /<hash> /cool_movies
+
+  
+  
+  ````
   
 
 
