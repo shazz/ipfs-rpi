@@ -1,6 +1,6 @@
 ## IPFS RPi
 
-A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other ARM-based devices working in Docker containers
+A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other ARM-based devices working in a Docker container
 
 ### Installation
 
@@ -16,7 +16,10 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
 ### Web interface:
 
   Open a browser at:
-  [http://<host-ip>:15001/ipfs/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub/#/files/](http://<host-ip>:15001/ipfs/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub/#/files/)
+  [http://host-ip:15001/ipfs/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub/#/files/](http://host-ip:15001/ipfs/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub/#/files/)
+  
+  To read a file from the network:
+  [http://host-ip:18080/ipfs/Qmd4CVn3EgC1VQcF9dc2Y49pp7CuJKQe82pUS6ZnAo7abY](http://host-ip:18080/ipfs/Qmd4CVn3EgC1VQcF9dc2Y49pp7CuJKQe82pUS6ZnAo7abY)
   
 ### CLI
 
@@ -25,7 +28,7 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
   sudo docker exec -it ipfs ipfs pin ls --type recursive
   ````
   
-  Use the /shared volume to add / get files:
+  Use the /shared volume to add files in the unixfs:
   ````
   cp -r mymovies shared/
   sudo docker exec -it ipfs ipfs add -r /shared/mymovies/
@@ -35,6 +38,12 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
   
   sudo docker exec -it ipfs ipfs files cp /ipfs/QmVRafFA8Qv4nGqRhUdDXDNn58hLQZTkSQ9YeYViDHJbGV /
   sudo docker exec -it ipfs ipfs files mv /QmVRafFA8Qv4nGqRhUdDXDNn58hLQZTkSQ9YeYViDHJbGV /cool_movies
+  ````
+  
+  To pin a file locally:
+  ````SHELL
+  sudo docker exec -it ipfs ipfs pin QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH
+  sudo docker exec -it ipfs ipfs pin ls --type recursive
   ````
   
 
