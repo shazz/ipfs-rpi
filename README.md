@@ -29,11 +29,12 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
   ````
   cp -r mymovies shared/
   sudo docker exec -it ipfs ipfs add -r /shared/mymovies/
-  sudo docker exec -it ipfs ipfs files cp /ipfs/<hash>
-  sudo docker exec -it ipfs ipfs files mv /<hash> /cool_movies
-
+  added QmbFMke1KXqnYyBBWxB74N4c5SBnJMVAiMNRcGu6x1AwQH mymovies/movie1.avi
+  added Qmd4CVn3EgC1VQcF9dc2Y49pp7CuJKQe82pUS6ZnAo7abY mymovies/movie2.avi
+  added QmVRafFA8Qv4nGqRhUdDXDNn58hLQZTkSQ9YeYViDHJbGV mymovies
   
-  
+  sudo docker exec -it ipfs ipfs files cp /ipfs/QmVRafFA8Qv4nGqRhUdDXDNn58hLQZTkSQ9YeYViDHJbGV /
+  sudo docker exec -it ipfs ipfs files mv /QmVRafFA8Qv4nGqRhUdDXDNn58hLQZTkSQ9YeYViDHJbGV /cool_movies
   ````
   
 
