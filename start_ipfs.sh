@@ -13,7 +13,21 @@ else
   ipfs init $INIT_ARGS
   ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
   ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
+  ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
+  ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "POST"]'
 
+  echo "starting default daemon"
+  nohup ipfs daemon >/dev/null 2>&1 &
+
+  echo "get webui"
+  cd /tmp
+  curl https://ipfs.io/api/v0/get/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub | tar -xf -
+  ipfs add -r QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub
+
+  echo "kill daemon"
+  killall ipfs  
+
+  echo "set private swarm"
   ipfs bootstrap rm --all
   ipfs bootstrap add /ip4/$(hostname -i)/tcp/4001/ipfs/$(ipfs config show | grep "PeerID" |  sed 's/^.*: "\(.*\)"$/\1/')
 
@@ -45,6 +59,5 @@ else
 
 fi
 
-# edits ...
 export LIBP2P_FORCE_PNET=1 
 ipfs daemon

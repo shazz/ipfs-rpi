@@ -11,4 +11,6 @@ RUN cd /tmp/ipfs-rpi-master && ./install
 
 WORKDIR /root
 ADD start_ipfs.sh .
-ENTRYPOINT ["/bin/bash", "/root/start_ipfs.sh"]
+#ENTRYPOINT ["/bin/bash", "/root/start_ipfs.sh"]
+CMD ["/bin/bash", "/root/start_ipfs.sh"]
+
