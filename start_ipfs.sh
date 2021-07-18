@@ -21,11 +21,11 @@ else
 
   echo "get webui"
   cd /tmp
-  curl https://ipfs.io/api/v0/get/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub | tar -xf -
-  ipfs add -r QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub
+  curl https://ipfs.io/api/v0/get/bafybeiflkjt66aetfgcrgvv75izymd5kc47g6luepqmfq6zsf5w6ueth6y | tar -xf -
+  ipfs add -r bafybeiflkjt66aetfgcrgvv75izymd5kc47g6luepqmfq6zsf5w6ueth6y
 
   echo "kill daemon"
-  killall ipfs  
+  killall ipfs
 
   echo "set private swarm"
   ipfs bootstrap rm --all
@@ -59,5 +59,5 @@ else
 
 fi
 
-export LIBP2P_FORCE_PNET=1 
-ipfs daemon
+export LIBP2P_FORCE_PNET=1
+ipfs daemon --unrestricted-api
