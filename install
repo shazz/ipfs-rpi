@@ -52,42 +52,6 @@ echo ">>> Starting IPFS"
 # Maybe initialize IPFS
 [ ! -d ~/.ipfs ] && ipfs init
 
-# Install and enable bring-up configurations for IPFS daemon
-init_system=$(get_init_system)
-ipfs_path=$HOME/.ipfs
-ipfs_user=$(whoami)
-ipfs_group=$(id -gn)
-
-if [ $init_system == "systemd" ]; then
-  cat ./templates/ipfs-daemon.service.tpl | \
-  sed "s|{{ipfs_path}}|${ipfs_path}|g" | \
-  sed "s|{{ipfs_user}}|${ipfs_user}|g" | \
-  sed "s|{{ipfs_group}}|${ipfs_group}|g" | \
-  tee /lib/systemd/system/ipfs-daemon.service > /dev/null
-
-  systemctl daemon-reload
-  if [ "$mode" == "install" ]; then
-    systemctl enable --now ipfs-daemon
-  elif [ "$mode" == "update" ]; then
-    systemctl restart ipfs-daemon
-  fi
-elif [ $init_system == "upstart" ]; then
-  cat ./templates/ipfs-daemon.conf.tpl | \
-  sed "s|{{ipfs_path}}|${ipfs_path}|g" | \
-  sed "s|{{ipfs_user}}|${ipfs_user}|g" | \
-  tee /etc/init/ipfs-daemon.conf > /dev/null
-
-  initctl reload-configuration
-  if [ "$mode" == "install" ]; then
-    service ipfs-daemon start
-  elif [ "$mode" == "update" ]; then
-    service ipfs-daemon stop
-    service ipfs-daemon start
-  fi
-else
-  echo ">>> Unable to detect init system - you don't seem to be using systemd or upstart. The IPFS daemon will have to be controlled manually."
-fi
-
 rm $tar_gz_destination
 
 echo ">>> All done."
