@@ -60,4 +60,4 @@ else
 fi
 
 export LIBP2P_FORCE_PNET=1
-ipfs daemon --unrestricted-api
+ipfs daemon --unrestricted-api --writable
