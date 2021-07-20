@@ -27,9 +27,12 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
   
 ### CLI
 
+  Note: you can jsut type `ipfs` instead of `sudo docker exec -it ipfs`
+
   ex:
   ````SHELL
   sudo docker exec -it ipfs ipfs pin ls --type recursive
+  ipfs pin ls --type recursive
   ````
   
   Use the /shared volume to add files in the unixfs:
