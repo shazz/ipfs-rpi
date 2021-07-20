@@ -1,5 +1,7 @@
 set -e
 repo=/data/ipfs
+webui_cdi1_latest = "bafybeiflkjt66aetfgcrgvv75izymd5kc47g6luepqmfq6zsf5w6ueth6y"
+webui_cdi1="bafybeid26vjplsejg7t3nrh7mxmiaaxriebbm4xxrxxdunlk7o337m5sqq"
 
 ipfs version
 
@@ -15,14 +17,17 @@ else
   ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
   ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
   ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "POST"]'
-
-  echo "starting default daemon"
+  
+  echo "starting default public daemon"
   nohup ipfs daemon >/dev/null 2>&1 &
 
-  echo "get webui"
+  echo "add webui packages"
   cd /tmp
-  curl https://ipfs.io/api/v0/get/bafybeiflkjt66aetfgcrgvv75izymd5kc47g6luepqmfq6zsf5w6ueth6y | tar -xf -
-  ipfs add -r bafybeiflkjt66aetfgcrgvv75izymd5kc47g6luepqmfq6zsf5w6ueth6y
+  curl https://ipfs.io/api/v0/get/$webui_cdi1_latest | tar -xf -
+  ipfs add --cid-version 1 -r $webui_cdi1_latest
+  
+  curl https://ipfs.io/api/v0/get/$webui_cdi1 | tar xf -
+  ipfs add --cid-version 1 -r $webui_cdi1  
 
   echo "kill daemon"
   killall ipfs
@@ -59,5 +64,6 @@ else
 
 fi
 
+# force private mode, without a swarm key the dameon won't start
 export LIBP2P_FORCE_PNET=1
 ipfs daemon --unrestricted-api --writable
