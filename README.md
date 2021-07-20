@@ -20,7 +20,7 @@ A bare bones [IPFS](https://ipfs.io) installer for the Raspberry Pi and other AR
 ### Web interface:
 
   Open a browser at:
-  [http://host-ip:15001/ipfs/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub/#/files/](http://host-ip:15001/ipfs/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub/#/files/)
+  [http://host-ip:15001/ipfs/QmcB9KLBaivEU1NLpXH2UswDWQT23E1CbAcTsZprZqcho6#/files/](http://host-ip:15001/ipfs/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub/#/files/)
   
   To read a file from the network:
   [http://host-ip:18080/ipfs/Qmd4CVn3EgC1VQcF9dc2Y49pp7CuJKQe82pUS6ZnAo7abY](http://host-ip:18080/ipfs/Qmd4CVn3EgC1VQcF9dc2Y49pp7CuJKQe82pUS6ZnAo7abY)
