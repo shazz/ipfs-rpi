@@ -1,0 +1,66 @@
+version: '3.4'
+
+# This is an example docker-compose file to quickly test an IPFS Cluster
+# with multiple peers on a contained environment.
+
+# It runs 3 cluster peers (cluster0, cluster1...) attached to go-ipfs daemons
+# (ipfs0, ipfs1...) using the CRDT consensus component. Cluster peers
+# autodiscover themselves using mDNS on the docker internal network.
+#
+# To interact with the cluster use "ipfs-cluster-ctl" (the cluster0 API port is
+# exposed to the locahost. You can also "docker exec -ti cluster0 sh" and run
+# it from the container. "ipfs-cluster-ctl peers ls" should show all 3 peers a few
+# seconds after start.
+#
+# For persistance, a "compose" folder is created and used to store configurations
+# and states. This can be used to edit configurations in subsequent runs. It looks
+# as follows:
+#
+# repo/
+# |-- cluster
+# |-- ipfs
+# 
+# During the first start, default configurations are created for all peers.
+
+networks:
+  ipfs-network:
+
+services:
+
+  ipfs:
+    container_name: ipfs
+    image: ipfs:rpi
+    networks:
+      - ipfs-network
+    ports:
+      - "14001:4001" # ipfs swarm
+      - "15001:5001" # ipfs api
+      - "18080:8080" # ipfs gateway
+    volumes:
+      - ./repo/ipfs:/data/ipfs
+      - ./shared:/shared
+      
+  cluster:
+    container_name: cluster
+    image: ipfs-cluster:rpi
+    depends_on:
+      - ipfs
+    environment:
+      CLUSTER_PEERNAME: cluster
+      CLUSTER_SECRET: ${CLUSTER_SECRET} # From shell variable if set
+      CLUSTER_IPFSHTTP_NODEMULTIADDRESS: /dns4/ipfs/tcp/5001
+      CLUSTER_CRDT_TRUSTEDPEERS: '*' # Trust all peers in Cluster
+      CLUSTER_RESTAPI_HTTPLISTENMULTIADDRESS: /ip4/0.0.0.0/tcp/9094 # Expose API
+      CLUSTER_MONITORPINGINTERVAL: 2s # Speed up peer discovery
+    networks:
+      - ipfs-network
+    ports:
+          # Open API port (allows ipfs-cluster-ctl usage on host)
+          - "9094:9094"
+          # The cluster swarm port would need  to be exposed if this container
+          # was to connect to cluster peers on other hosts.
+          # But this is just a testing cluster.
+          - "9096:9096" # Cluster IPFS Proxy endpoint
+    volumes:
+      - ./repo/cluster:/data/ipfs-cluster
+
