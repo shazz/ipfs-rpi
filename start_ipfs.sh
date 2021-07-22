@@ -1,6 +1,6 @@
 set -e
 repo=/data/ipfs
-webui_cdi1_latest = "bafybeiflkjt66aetfgcrgvv75izymd5kc47g6luepqmfq6zsf5w6ueth6y"
+webui_cdi1_latest="bafybeiflkjt66aetfgcrgvv75izymd5kc47g6luepqmfq6zsf5w6ueth6y"
 webui_cdi1="bafybeid26vjplsejg7t3nrh7mxmiaaxriebbm4xxrxxdunlk7o337m5sqq"
 
 ipfs version
