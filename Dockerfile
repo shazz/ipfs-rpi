@@ -5,9 +5,11 @@ VOLUME /data/ipfs
 
 RUN apk update && apk upgrade && apk add --update bash wget ca-certificates zip curl
 
-RUN wget https://github.com/shazz/ipfs-rpi/archive/refs/heads/master.zip -O /tmp/master.zip
-RUN unzip /tmp/master.zip -d /tmp/
-RUN cd /tmp/ipfs-rpi-master && ./install
+ADD install tmp/
+RUN cd /tmp && ./install
+# RUN wget https://github.com/shazz/ipfs-rpi/archive/refs/heads/master.zip -O /tmp/master.zip
+# RUN unzip /tmp/master.zip -d /tmp/
+# RUN cd /tmp/ipfs-rpi-master && ./install
 
 WORKDIR /root
 ADD start_ipfs.sh .
