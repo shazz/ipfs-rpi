@@ -13,18 +13,24 @@ rpi_revision=`sed -rn 's/Revision\s+\:\s+([0-9a-z_\-\s\,\(\)]+)/\1/p' /proc/cpui
 
 if [[ $rpi_revision == *"900092"* ]]; then
   arm_type="Raspberry Pi model zero"
+  ipfs_arch=${2-"linux-arm"}
 elif [[ $rpi_revision == *"00"* ]]; then
   arm_type="Raspberry Pi 1"
+  ipfs_arch=${2-"linux-arm"}
 elif [[ $rpi_revision == *"a01041"* || $rpi_revision == *"a21041"* ]]; then
   arm_type="Raspberry Pi 2"
+  ipfs_arch=${2-"linux-arm"}
 elif [[ $rpi_revision == *"a02082"* || $rpi_revision = *"a22082"* ]]; then
   arm_type="Raspberry Pi 3"
+  ipfs_arch=${2-"linux-arm64"}
+elif [[ $rpi_revision == *"c03112"* ]]; then  
+  arm_type="Raspberry Pi 4"
+  ipfs_arch=${2-"linux-arm64"}
 fi
 
-echo ">>> Starting installation on ARM device compatible with $arm_type"
+echo ">>> Starting installation on ARM device compatible with $arm_type" for $ipfs_arch
 
 # Download and install IPFS
-ipfs_arch=${2-"linux-arm"}
 ipfs_version=$(curl -s https://dist.ipfs.io/go-ipfs/versions | tail -1)
 ipfs_version=${1-$ipfs_version}
 ipfs_version="v${ipfs_version#v}"
